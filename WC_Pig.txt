@@ -1,0 +1,5 @@
+lines = load 'Downloads/word_count.txt' as (line:chararray);
+words = foreach lines generate flatten(TOKENIZE(line)) as word;
+grouped_words = group words by word;
+result = foreach grouped_words generate group, COUNT(words);
+dump result;
